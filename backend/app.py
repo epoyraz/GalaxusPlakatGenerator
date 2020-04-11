@@ -4,14 +4,15 @@ from flask import Flask
 from flask import request
 from flask import send_file
 from flask import redirect
+from flask_cors import CORS, cross_origin
 from bs4 import BeautifulSoup
 from PIL import Image
 from PIL import ImageFont
 from PIL import ImageDraw
 from io import BytesIO, StringIO
 
-
 app = Flask(__name__)
+CORS(app)
 
 # localhost:5000/generate?spruch=Hello&link=https%3A%2F%2Fwww.galaxus.ch%2Fde%2Fs1%2Fproduct%2Fsony-playstation-4-slim-500gb-de-fr-it-en-spielkonsole-5895212
 
@@ -20,6 +21,7 @@ def entry():
     return redirect("/generate?spruch=Hello&link=https%3A%2F%2Fwww.galaxus.ch%2Fde%2Fs1%2Fproduct%2Fsony-playstation-4-slim-500gb-de-fr-it-en-spielkonsole-5895212")
 
 @app.route("/generate")
+@cross_origin()
 def hello():
     spruch = request.args.get('spruch')
     link = request.args.get('link')
