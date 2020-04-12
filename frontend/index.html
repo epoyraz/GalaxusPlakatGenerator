@@ -1,16 +1,28 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script>
-      function getImage(){
+
+<head>
+  <link rel="stylesheet" href="css/styles.css">
+  <script>
+
+    function copyToClipboard(elementId) {
+      var aux = document.createElement("input");
+      aux.setAttribute("value", document.getElementById(elementId).innerHTML);
+      document.body.appendChild(aux);
+      aux.select();
+      document.execCommand("copy");
+      document.body.removeChild(aux);
+      document.getElementById("copyLink").innerHTML = "kopiert!";
+    }
+
+    function getImage() {
 
       var spruch = document.getElementById("spruch").value;
       var produktlink = encodeURI(document.getElementById("produktlink").value);
       console.log(spruch);
       console.log(produktlink);
       var url =
-        "http://127.0.0.1:5000/generate?spruch="+spruch+"&link=" + produktlink;
+        "http://127.0.0.1/generate?spruch=" + spruch + "&link=" + produktlink;
       var options = {
         method: "GET",
         mode: "cors",
@@ -19,12 +31,21 @@
       var request = new Request(url);
 
       fetch(request, options).then((response) => {
-        response.arrayBuffer().then((buffer) => {
-          var base64Flag = "data:image/jpeg;base64,";
-          var imageStr = arrayBufferToBase64(buffer);
+        if (response.ok) {
+          response.arrayBuffer().then((buffer) => {
+            var base64Flag = "data:image/jpeg;base64,";
+            var imageStr = arrayBufferToBase64(buffer);
 
-          document.querySelector("img").src = base64Flag + imageStr;
-        });
+            document.querySelector("#plakat").src = base64Flag + imageStr;
+            document.querySelector("#downloadLink").href = base64Flag + imageStr;
+            document.querySelector("#downloadLink").download = spruch + ".jpeg"
+            document.querySelector("#visualLink").href = url;
+            document.querySelector("#visualLink").innerHTML = url;
+            document.getElementById("copyLink").innerHTML = "Link Kopieren";
+          });
+        } else {
+          console.log("error")
+        }
       });
 
       function arrayBufferToBase64(buffer) {
@@ -35,18 +56,59 @@
 
         return window.btoa(binary);
       }
-    }
-    </script>
-  </head>
-  <body>
-    
-    <label for="fname">Galaxus für...</label>
-    <input type="text" id="spruch" name="spruch" /><br /><br />
-    <label for="lname">Produktlink</label>
-    <input type="text" id="produktlink" name="produktlink" /><br /><br />
 
-    <button onclick="getImage()">Generieren</button>
-    <br />
-    <img src="horer.jpeg" id="bild" height="600" width="450" />
-  </body>
+    }
+  </script>
+</head>
+
+<body>
+
+  <div id="header">
+    <div id="headerRegenbogen">
+      <div id="headerBeige"></div>
+      <div id="headerGelb"></div>
+      <div id="headerOrange"></div>
+      <div id="headerGruen"></div>
+      <div id="headerLila"></div>
+      <div id="headerBlau"></div>
+    </div>
+    <div id="headerLogo">
+      <img id="headerImg" src="images/galaxus-logo.png" />
+    </div>
+  </div>
+  <div id="mainBody">
+    <div id="linkeSeite">
+      <h1 id="titel">Generieren</h1>
+      <p id="paragraph">
+        Generiere dein persönliches Galaxus Werberplakat.
+      </p>
+      <div>
+        <label id="label">Galaxus für...</label>
+        <br />
+        <input id="spruch" type="text" name="slogan" class="textFeld" placeholder="dein eigener Slogan..." />
+      </div>
+      <div>
+        <label id="label">Galaxus Produkt Link</label>
+        <br />
+        <input id="produktlink" type="text" name="link" class="textFeld"
+          placeholder="https://www.galaxus.ch/de/s3/product/..." />
+      </div>
+      <button id="generieren" class="button" onClick="getImage()">Generieren</button>
+    </div>
+    <div id="rechteSeite">
+      <h1 id="titel">Vorschau</h1>
+      <p class="paragraph">So könnte dein Plakat aussehen.</p>
+      <img id="plakat" height="600" width="450" src="images/analplu.png" />
+      <p id="visualLink" class="paragraph"></p>
+      <div id="buttonGroup">
+        <button id="copyLink" class="button" onClick="copyToClipboard('visualLink')">Link Kopieren</button>
+        <a id="downloadLink" download="plakat.jpeg" href="data:image/png;base64,asdasd...">
+          <button id="downloadButoon" class="button">Herunterladen</button>
+        </a>
+      </div>
+    </div>
+  </div>
+
+</body>
+
 </html>

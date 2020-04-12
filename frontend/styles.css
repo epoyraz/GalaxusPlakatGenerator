@@ -1,0 +1,197 @@
+@font-face {
+    font-family: 'gibsonregular';
+    src: url('font/gibson-webfont.eot');
+    src: url('font/gibson-webfont.eot?#iefix') format('embedded-opentype'),
+         url('font/gibson-webfont.woff') format('woff'),
+         url('font/gibson-webfont.ttf') format('truetype'),
+         url('font/gibson-webfont.svg#gibsonregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'gibson_lightbold';
+    src: url('font/gibson-semibold-webfont.eot');
+    src: url('font/gibson-semibold-webfont.eot?#iefix') format('embedded-opentype'),
+         url('font/gibson-semibold-webfont.woff') format('woff'),
+         url('font/gibson-semibold-webfont.ttf') format('truetype'),
+         url('font/gibson-semibold-webfont.svg#gibson_lightbold') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'gibson_lightitalic';
+    src: url('font/gibson-light-italic-webfont.eot');
+    src: url('font/gibson-light-italic-webfont.eot?#iefix') format('embedded-opentype'),
+         url('font/gibson-light-italic-webfont.woff') format('woff'),
+         url('font/gibson-light-italic-webfont.ttf') format('truetype'),
+         url('font/gibson-light-italic-webfont.svg#gibson_lightitalic') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+html {
+    background-color: #D1D3D4;
+}
+
+#titel {
+    font-size: 20px;
+    color: #1C1C1C;
+    letter-spacing: 0.7px;
+}
+
+#paragraph {
+    font-size: 15px;
+    font-weight: inherit;
+    color: #1C1C1C;
+    letter-spacing: 0.7px;
+}
+
+#label {
+    font-size: 15px;
+    color: #666666;
+}
+
+#textFeld {
+    width: 320px;
+    height: 36px;
+    font-size: 14px;
+    padding-left: 7px;
+    border-radius: 1px;
+    color: #565656;
+    border-style: solid;
+    border-color: #1C1C1C;
+    border-width: 1px;
+    margin: 1px 0 10px 0;
+}
+
+button {
+    width: 175px;
+    height: 36px;
+    background-color: #1C1C1C;
+    border-style: none;
+    border-radius: 3px;
+    color: white;
+}
+
+#header {
+
+    height: 80px;
+    width: 100%;
+    background-color: white;
+    align-content: center;
+    max-width: 1218px;
+    margin: auto;
+    width: 1218;
+}
+
+#headerRegenbogen {
+    display: flex;
+    max-width: 1218px;
+    margin: auto;
+    width: 1218;
+    background-color: antiquewhite;
+}
+
+#headerBeige {
+    background-color: #C4A277;
+    width: calc(100% / 6);
+    height: 9px;
+}
+
+#headerGelb {
+    background-color: #FFC32D;
+    width: calc(100% / 6);
+    height: 9px;
+}
+
+#headerOrange {
+    background-color: #F67858;
+    height: 9px;
+    width: calc(100% / 6);
+}
+
+#headerGruen {
+    background-color: #84D160;
+    height: 9px;
+    width: calc(100% / 6);
+}
+
+#headerLila {
+    background-color: #B384D3;
+    height: 9px;
+    width: calc(100% / 6);
+}
+
+#headerBlau {
+    background-color: #72C7F9;
+    height: 9px;
+    width: calc(100% / 6);
+}
+
+#headerLogo {
+    height: 50px;
+    width: auto;
+    overflow: hidden;
+}
+
+#headerImg {
+    margin: 12px 0 0 8px;
+    float: left;
+    height: 30px;
+    width: auto;
+}
+
+#mainBody {
+    height: calc(100vh - 80px);
+    background-color: white;
+    align-content: center;
+    max-width: 1218px;
+    margin: auto;
+    width: 1218;
+    display: flex;
+    padding-top: 30px;
+}
+
+#linkeSeite {
+    width: calc(1218px / 2);
+    height: auto;
+    max-height: 778px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    padding: 0 9% 0 9%;
+    border-right-color: #aaaaaa;
+    border-right-style: solid;
+    border-right-width: 1px;
+}
+
+#generieren {
+    width: 320px;
+    height: 36px;
+    background-color: #1C1C1C;
+    border-style: none;
+    border-radius: 3px;
+    color: white;
+    margin-top: 10%;
+}
+
+#rechteSeite {
+    background-color: white;
+    width: calc(1218px / 2);
+    max-height: 778px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    padding: 0 9% 0 9%;
+}
+
+#buttonGroup {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
