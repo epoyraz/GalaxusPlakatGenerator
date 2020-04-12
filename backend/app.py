@@ -37,12 +37,6 @@ def hello():
     response = response + "<br>" + name + "<br>" + brand + "<br>" + price + "<br>"
     return serve_pil_image(newImage)
 
-
-@app.route("/image")
-def image():
-    filename = 'stereo.jpeg'
-    return send_file(filename, mimetype='image/jpeg')
-
 def serve_pil_image(pil_img):
     img_io = BytesIO()
     pil_img.save(img_io, 'JPEG', quality=70)
