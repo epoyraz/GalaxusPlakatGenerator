@@ -58,6 +58,18 @@ def generateImage(spruch, url):
     draw.text((100,250), spruch, (0,0,0), font=font)
     return background
 
+
+def getProductName(productNameAndBrand):
+    return productNameAndBrand.find('span').text
+
+def getBrand(productNameAndBrand):
+    return productNameAndBrand.find('strong').text
+
+def getProductNameAndBrand(html):
+        pageContent = html.find('main', attrs={'id': 'pageContent'})
+        productNameAndBrand = pageContent.find('h1', attrs={'class': 'productName'})
+        return productNameAndBrand
+
 def getData(url):
         user_agent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.132 Safari/537.36"
         response = requests.get(url, headers={'user-agent': user_agent,
@@ -68,12 +80,11 @@ def getData(url):
         result = {}
         content = response.content
         soup = BeautifulSoup(content, "html.parser")
-        html = soup.find('div', attrs={'class': 'productDetail ZZcb'})
-        productDetails = html.find('h1', attrs={'class': 'productName ZZcs'})
-        brand = productDetails.find('strong').text
-        name = productDetails.find('span').text
-        price = html.find('strong', attrs={'class': 'ZZbe'}).text.strip()
-        imageContainer = soup.find('picture', attrs={'class':'mediaPicture Z19y'})
+        nameAndBrand = getProductNameAndBrand(soup)
+        brand = getBrand(nameAndBrand)
+        name = getProductName(nameAndBrand)
+        price = soup.find('div', attrs={'class': 'productDetail'}).find('strong').text
+        imageContainer = soup.find('picture', attrs={'class':'mediaPicture'})
         imageLink = imageContainer.find('img')
         imageLink = imageLink["src"].split("?")
         result["imglink"] = imageLink[0]
