@@ -25,8 +25,6 @@ def entry():
 def hello():
     spruch = request.args.get('spruch')
     link = request.args.get('link')
-    response = "Hallo, das ist mein Spruch: <br> Galaxus für " + spruch + "<br>"
-    response = response + "Und das ist mein Link : " + link
     data = getData(link)
     name = data["name"]
     brand = data["brand"]

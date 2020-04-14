@@ -41,7 +41,7 @@
             document.querySelector("#downloadLink").href = base64Flag + imageStr;
             document.querySelector("#downloadLink").download = spruch + ".jpeg"
             document.querySelector("#visualLink").href = url;
-            document.querySelector("#visualLink").innerHTML = url;
+            document.querySelector("#visualLink").innerHTML = encodeURI(url);
             document.getElementById("copyLink").innerHTML = "Link Kopieren";
           });
         } else {
