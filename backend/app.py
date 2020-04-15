@@ -25,12 +25,8 @@ def hello():
     spruch = request.args.get('spruch')
     link = request.args.get('link')
     data = getData(link)
-    name = data["name"]
-    brand = data["brand"]
-    price = data["price"]
     imglink = data["imglink"]
     newImage = generateImage(spruch, imglink)
-    response = response + "<br>" + name + "<br>" + brand + "<br>" + price + "<br>"
     return serve_pil_image(newImage)
 
 def serve_pil_image(pil_img):
