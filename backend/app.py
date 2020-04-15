@@ -15,7 +15,6 @@ app = Flask(__name__)
 CORS(app)
 
 # localhost:5000/generate?spruch=Hello&link=https%3A%2F%2Fwww.galaxus.ch%2Fde%2Fs1%2Fproduct%2Fsony-playstation-4-slim-500gb-de-fr-it-en-spielkonsole-5895212
-
 @app.route("/")
 def entry():
     return redirect("/generate?spruch=Hello&link=https%3A%2F%2Fwww.galaxus.ch%2Fde%2Fs1%2Fproduct%2Fsony-playstation-4-slim-500gb-de-fr-it-en-spielkonsole-5895212")
@@ -31,7 +30,6 @@ def hello():
     price = data["price"]
     imglink = data["imglink"]
     newImage = generateImage(spruch, imglink)
-    print(newImage)
     response = response + "<br>" + name + "<br>" + brand + "<br>" + price + "<br>"
     return serve_pil_image(newImage)
 
@@ -42,7 +40,13 @@ def serve_pil_image(pil_img):
     return send_file(img_io, mimetype='image/jpeg')
 
 def generateImage(spruch, url):
-    response = requests.get(url)
+    user_agent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.132 Safari/537.36"
+    response = requests.get(url, headers={'user-agent': user_agent,
+        'accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9',
+        'accept-encoding': 'gzip, deflate, br'
+        })
+
+    print("response :" + str(end_getResponse - start_getResponse))
     background = Image.open("template.jpg")
     img = Image.open(BytesIO(response.content))
     basewidth = 500
