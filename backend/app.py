@@ -42,7 +42,6 @@ def generateImage(spruch, url):
         'accept-encoding': 'gzip, deflate, br'
         })
 
-    print("response :" + str(end_getResponse - start_getResponse))
     background = Image.open("template.jpg")
     img = Image.open(BytesIO(response.content))
     basewidth = 500
