@@ -33,6 +33,8 @@ def hello():
     name = re.match(r"(.*)(\(.*\))",data["name"]).group(1) if "(" in data["name"] else data["name"]
     price = data["price"].strip()
     color = random_color()
+    if not brand or '-' in name:
+        name = fitName(name)
     newImage = generateImage(color, price, brand, name, spruch, imglink)
     return serve_pil_image(newImage)
 
@@ -43,8 +45,11 @@ def serve_pil_image(pil_img):
     return send_file(img_io, mimetype='image/jpeg')
 
 def random_color():
-    color = list(numpy.random.choice(range(256), size=3))
-    return tuple(color)
+    color = [[68,227,144], [239, 35, 30], [17 , 15, 30],
+		    [137, 66, 248], [178, 135, 194], [205, 241, 84],
+            [48, 101, 81], [177, 211, 38],  [129, 72, 14],
+            [91, 207, 218]]
+    return tuple(color[random.randint(0,9)])
 
 def generateImage(color, price, brand, name, spruch, url):
     user_agent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.132 Safari/537.36"
@@ -66,9 +71,9 @@ def generateImage(color, price, brand, name, spruch, url):
     if img_ratio < 1:
         draw.text((100, 0), "Galaxus für", (0, 0, 0), font=fontSlogan)
         draw.text((100,150), fitText(spruch), (0,0,0), font=fontSlogan)
-        draw.text((700,500), price, (0,0,0), font=fontInner)
-        draw.text((700,530), brand, color, font=fontBrand)
-        draw.text((700,560), name, color, font=fontInner)
+        draw.text((800,500), price, (0,0,0), font=fontInner)
+        draw.text((800,530), brand, color, font=fontBrand)
+        draw.text((800,560), name, color, font=fontInner)
     else:
         draw.text((100, 0), "Galaxus für", (0, 0, 0), font=fontSlogan)
         draw.text((100,150),  fitText(spruch), (0,0,0), font=fontSlogan)
@@ -83,6 +88,17 @@ def fitText(spruch):
     else:
         newText = spruch
     return newText
+
+def fitName(name): 
+    char_index = 0
+    newName = ""
+    while char_index < len(name):
+        if(name[char_index] == ' ' or name[char_index] == '-'):
+            newName += "\n"
+        else:
+            newName += name[char_index]
+        char_index += 1
+    return newName
 
 def fitSize(pil_img):
     img_ratio = pil_img.size[0]/ float(pil_img.size[1])
@@ -102,7 +118,7 @@ def getProductName(productNameAndBrand):
     return productNameAndBrand.find('span').text
 
 def getBrand(productNameAndBrand):
-    return productNameAndBrand.find('strong').text
+    return productNameAndBrand.find('strong').text if productNameAndBrand.find('strong') else ""
 
 def getProductNameAndBrand(html):
         pageContent = html.find('main', attrs={'id': 'pageContent'})
