@@ -14,7 +14,6 @@ from PIL import ImageFont
 from PIL import ImageDraw
 from io import BytesIO, StringIO
 
-
 app = Flask(__name__)
 CORS(app)
 
