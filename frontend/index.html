@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="css/styles.css">
+  <script>
+
+    function copyToClipboard(elementId) {
+      var aux = document.createElement("input");
+      aux.setAttribute("value", document.getElementById(elementId).textContent);
+      document.body.appendChild(aux);
+      aux.select();
+      document.execCommand("copy");
+      document.body.removeChild(aux);
+      document.getElementById("copyLink").innerHTML = "kopiert!";
+    }
+
+    function validURL(str) {
+      var pattern = new RegExp('^(https?:\\/\\/)?' + // protocol
+        '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|' + // domain name
+        '((\\d{1,3}\\.){3}\\d{1,3}))' + // OR ip (v4) address
+        '(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*' + // port and path
+        '(\\?[;&a-z\\d%_.~+=-]*)?' + // query string
+        '(\\#[-a-z\\d_]*)?$', 'i'); // fragment locator
+      return !!pattern.test(str);
+    }
+
+    function validate(spruch, link) {
+      if (spruch === "") {
+        console.log("spruch cannot be empty");
+        return false;
+      }
+      if (link === "") {
+        console.log("link cannot be empty")
+        return false;
+      }
+      if (!validURL(link)) {
+        console.log("not a valid link!")
+        return false;
+      }
+
+      return true;
+    }
+
+    function getImage() {
+
+      var spruch = document.getElementById("spruch").value;
+      var produktlink = encodeURI(document.getElementById("produktlink").value);
+      if (validate(spruch, produktlink)) {
+        var url =
+          "http://plakat-generator.westeurope.azurecontainer.io/generate?spruch=" + spruch + "&link=" + produktlink;
+        var options = {
+          method: "GET",
+          mode: "cors",
+          cache: "default",
+        };
+        var request = new Request(url);
+
+        fetch(request, options).then((response) => {
+          if (response.ok) {
+            response.arrayBuffer().then((buffer) => {
+              var base64Flag = "data:image/jpeg;base64,";
+              var imageStr = arrayBufferToBase64(buffer);
+
+              document.querySelector("#plakat").src = base64Flag + imageStr;
+              document.querySelector("#downloadLink").href = base64Flag + imageStr;
+              document.querySelector("#downloadLink").download = spruch + ".jpeg"
+              document.querySelector("#visualLink").href = url;
+              document.querySelector("#visualLink").innerHTML = encodeURI(url);
+              document.getElementById("copyLink").innerHTML = "Link Kopieren";
+              document.getElementById("copyLink").disabled = false;
+              document.getElementById("downloadButton").disabled = false;
+            });
+          } else {
+            console.log("error")
+          }
+        });
+      }
+
+      function arrayBufferToBase64(buffer) {
+        var binary = "";
+        var bytes = [].slice.call(new Uint8Array(buffer));
+
+        bytes.forEach((b) => (binary += String.fromCharCode(b)));
+
+        return window.btoa(binary);
+      }
+
+    }
+  </script>
+</head>
+
+<body>
+
+  <div id="header">
+    <div id="headerRegenbogen">
+      <div id="headerBeige"></div>
+      <div id="headerGelb"></div>
+      <div id="headerOrange"></div>
+      <div id="headerGruen"></div>
+      <div id="headerLila"></div>
+      <div id="headerBlau"></div>
+    </div>
+    <div id="headerLogo">
+      <img id="headerImg" src="images/galaxus-logo.png" />
+    </div>
+  </div>
+  <div id="mainBody">
+    <div id="linkeSeite">
+      <h1 id="titel">Generieren</h1>
+      <p id="paragraph">
+        Generiere dein persönliches Galaxus Werberplakat.
+      </p>
+      <div>
+        <label id="label">Galaxus für...</label>
+        <br />
+        <input id="spruch" type="text" name="slogan" class="textFeld" placeholder="dein eigener Slogan..." />
+      </div>
+      <div>
+        <label id="label">Galaxus Produkt Link</label>
+        <br />
+        <input id="produktlink" type="text" name="link" class="textFeld"
+          placeholder="https://www.galaxus.ch/de/s3/product/..." />
+      </div>
+      <button id="generieren" class="button" onClick="getImage()">Generieren</button>
+    </div>
+    <div id="rechteSeite">
+      <h1 id="titel">Vorschau</h1>
+      <p class="paragraph">So könnte dein Plakat aussehen.</p>
+      <img id="plakat" height="600" width="450" src="images/analplu.png" />
+      <p id="visualLink" class="paragraph"></p>
+      <div id="buttonGroup">
+        <button id="copyLink" class="button" onClick="copyToClipboard('visualLink')" disabled>Link Kopieren</button>
+        <a id="downloadLink" download="plakat.jpeg" href="data:image/png;base64,asdasd...">
+          <button id="downloadButton" class="button" disabled>Herunterladen</button>
+        </a>
+      </div>
+    </div>
+  </div>
+
+</body>
+
+</html>
