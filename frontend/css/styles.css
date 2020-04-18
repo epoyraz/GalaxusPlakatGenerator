@@ -48,15 +48,6 @@ html {
     margin: 1px 0 10px 0;
 }
 
-.button {
-    width: 175px;
-    height: 36px;
-    background-color: #1C1C1C;
-    border-style: none;
-    border-radius: 3px;
-    color: white;
-}
-
 button:disabled ,
 button[disabled]{
     width: 175px;
@@ -135,7 +126,7 @@ button[disabled]{
 }
 
 #mainBody {
-    height: calc(100vh - 80px);
+    min-height: calc(100vh - 80px);
     background-color: white;
     align-content: center;
     max-width: 1218px;
@@ -143,20 +134,43 @@ button[disabled]{
     width: 1218;
     display: flex;
     padding-top: 30px;
+    object-fit: contain;
 }
 
 #linkeSeite {
+    max-width: calc(1218px / 2);
     width: calc(1218px / 2);
     height: auto;
-    max-height: 778px;
+    max-height: 800px;
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
+    align-items: center;
     justify-content: flex-start;
-    padding: 0 9% 0 9%;
+
     border-right-color: #aaaaaa;
     border-right-style: solid;
     border-right-width: 1px;
+}
+#rechteSeite {
+    max-width: calc(1218px / 2);
+    width: calc(1218px / 2);
+    max-height: 800px;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+
+}
+
+#linkeSeiteContainer {
+    max-width: 320px;
+    width: auto;
+}
+#rechteSeiteContainer {
+    max-width: 450px;
+    width: auto;
+    max-height: 800px;
 }
 
 #generieren {
@@ -169,20 +183,87 @@ button[disabled]{
     margin-top: 10%;
 }
 
-#rechteSeite {
-    background-color: white;
-    width: calc(1218px / 2);
-    max-height: 778px;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: flex-start;
-    padding: 0 9% 0 9%;
+#plakat {
+    object-fit: contain;
+    max-height: 615px;
 }
 
+.paragraph2{
+    margin-top: -33px;
+}
+.button {
+    width: 175px;
+    height: 36px;
+    background-color: #1C1C1C;
+    border-style: none;
+    border-radius: 3px;
+    color: white;
+    margin-bottom: 15px;
+}
 #buttonGroup {
     width: 100%;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    overflow: hidden;
+    margin-top: -20px;
+}
+
+@media (max-width: 930px) {
+    #mainBody{
+        flex-direction: column;
+        height: 100%;
+        padding-top: 5px;
+        object-fit: contain;
+        align-items: center;
+        justify-content: flex-start;
+    }
+    #linkeSeite {
+        max-width: calc(1218px / 2);
+        width: auto;
+        background-color: white;
+
+        border-right-style: none;
+    }
+
+    #rechteSeite {
+        max-width: calc(1218px / 2);
+        width: auto;
+        height: auto;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+        background-color: white;
+        margin-top: 25px;
+    }
+
+    #rechteSeiteContainer {
+        border-top-color: #aaaaaa;
+        border-top-style: solid;
+        border-top-width: 1px;
+        padding-top: 20px;
+    }
+
+    #plakat {
+        max-width: 318px;
+    }
+
+    #paragraph2{
+        margin-top: -25px;
+    }
+
+    #buttonGroup {
+        flex-direction: column;
+    }
+
+    .button {
+        width: 320px;
+        height: 36px;
+        background-color: #1C1C1C;
+        border-style: none;
+        border-radius: 3px;
+        color: white;
+        margin-bottom: 15px;
+    }
 }

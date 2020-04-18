@@ -108,33 +108,37 @@
   </div>
   <div id="mainBody">
     <div id="linkeSeite">
-      <h1 id="titel">Generieren</h1>
-      <p id="paragraph">
-        Generiere dein persönliches Galaxus Werberplakat.
-      </p>
-      <div>
-        <label id="label">Galaxus für...</label>
-        <br />
-        <input id="spruch" type="text" name="slogan" class="textFeld" placeholder="dein eigener Slogan..." />
+      <div id="linkeSeiteContainer">
+        <h1 id="titel">Generieren</h1>
+        <p id="paragraph">
+          Generiere dein persönliches Galaxus Werberplakat.
+        </p>
+        <div>
+          <label id="label">Galaxus für...</label>
+          <br />
+          <input id="spruch" type="text" name="slogan" class="textFeld" placeholder="dein eigener Slogan..." />
+        </div>
+        <div>
+          <label id="label">Galaxus Produkt Link</label>
+          <br />
+          <input id="produktlink" type="text" name="link" class="textFeld"
+            placeholder="https://www.galaxus.ch/de/s3/product/..." />
+        </div>
+        <button id="generieren" class="button" onClick="getImage()">Generieren</button>
       </div>
-      <div>
-        <label id="label">Galaxus Produkt Link</label>
-        <br />
-        <input id="produktlink" type="text" name="link" class="textFeld"
-          placeholder="https://www.galaxus.ch/de/s3/product/..." />
-      </div>
-      <button id="generieren" class="button" onClick="getImage()">Generieren</button>
     </div>
     <div id="rechteSeite">
-      <h1 id="titel">Vorschau</h1>
-      <p class="paragraph">So könnte dein Plakat aussehen.</p>
-      <img id="plakat" height="600" width="450" src="images/analplu.png" />
-      <p id="visualLink" class="paragraph"></p>
-      <div id="buttonGroup">
-        <button id="copyLink" class="button" onClick="copyToClipboard('visualLink')" disabled>Link Kopieren</button>
-        <a id="downloadLink" download="plakat.jpeg" href="data:image/png;base64,asdasd...">
-          <button id="downloadButton" class="button" disabled>Herunterladen</button>
-        </a>
+      <div id="rechteSeiteContainer">
+        <h1 id="titel">Vorschau</h1>
+        <p class="paragraph">So könnte dein Plakat aussehen.</p>
+        <img id="plakat" height="600" width="450" src="images/analplu.png" />
+        <p id="visualLink" class="paragraph2"></p>
+        <div id="buttonGroup">
+          <button id="copyLink" class="button" onClick="copyToClipboard('visualLink')" disabled>Link Kopieren</button>
+          <a id="downloadLink" download="plakat.jpeg" href="data:image/png;base64,asdasd...">
+            <button id="downloadButton" class="button" disabled>Herunterladen</button>
+          </a>
+        </div>
       </div>
     </div>
   </div>
