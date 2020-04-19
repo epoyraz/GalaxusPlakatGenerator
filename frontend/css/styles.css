@@ -131,9 +131,9 @@ button[disabled]{
     align-content: center;
     max-width: 1218px;
     margin: auto;
-    width: 1218;
+    width: auto;
     display: flex;
-    padding-top: 30px;
+    padding-top: 5px;
     object-fit: contain;
 }
 
@@ -141,7 +141,7 @@ button[disabled]{
     max-width: calc(1218px / 2);
     width: calc(1218px / 2);
     height: auto;
-    max-height: 800px;
+    max-height: 840px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -154,7 +154,7 @@ button[disabled]{
 #rechteSeite {
     max-width: calc(1218px / 2);
     width: calc(1218px / 2);
-    max-height: 800px;
+    max-height: auto;
     height: auto;
     display: flex;
     flex-direction: column;
@@ -170,7 +170,6 @@ button[disabled]{
 #rechteSeiteContainer {
     max-width: 450px;
     width: auto;
-    max-height: 800px;
 }
 
 #generieren {
@@ -188,9 +187,6 @@ button[disabled]{
     max-height: 615px;
 }
 
-.paragraph2{
-    margin-top: -33px;
-}
 .button {
     width: 175px;
     height: 36px;
@@ -206,7 +202,6 @@ button[disabled]{
     flex-direction: row;
     justify-content: space-between;
     overflow: hidden;
-    margin-top: -20px;
 }
 
 @media (max-width: 930px) {
@@ -247,10 +242,6 @@ button[disabled]{
 
     #plakat {
         max-width: 318px;
-    }
-
-    #paragraph2{
-        margin-top: -25px;
     }
 
     #buttonGroup {
