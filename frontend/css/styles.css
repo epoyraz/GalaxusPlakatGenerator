@@ -50,8 +50,6 @@ html {
 
 button:disabled ,
 button[disabled]{
-    width: 175px;
-    height: 36px;
     background-color: #aaaaaa;
     border-style: none;
     border-radius: 3px;
