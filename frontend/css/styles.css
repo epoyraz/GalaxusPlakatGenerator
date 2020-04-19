@@ -175,11 +175,21 @@ button[disabled]{
 #generieren {
     width: 320px;
     height: 36px;
-    background-color: #1C1C1C;
+    background-color: #3C3C3C;
     border-style: none;
     border-radius: 3px;
     color: white;
     margin-top: 10%;
+
+}
+#generieren:hover{
+    cursor:pointer;
+    background-color: #1C1C1C;
+}
+#generieren:focus:active{
+	-webkit-box-shadow: 0 4px 4px -4px #1C1C1C;
+	   -moz-box-shadow: 0 4px 4px -4px #1C1C1C;
+            box-shadow: 0 4px 4px -4px #1C1C1C;
 }
 
 #plakat {
@@ -190,12 +200,24 @@ button[disabled]{
 .button {
     width: 175px;
     height: 36px;
-    background-color: #1C1C1C;
+    background-color: #3C3C3C;
     border-style: none;
     border-radius: 3px;
     color: white;
     margin-bottom: 15px;
 }
+
+.button:hover{
+    cursor:pointer;
+    background-color: #1C1C1C;
+}
+.button:focus:active{
+	-webkit-box-shadow: 0 4px 4px -4px #1C1C1C;
+	   -moz-box-shadow: 0 4px 4px -4px #1C1C1C;
+	        box-shadow: 0 4px 4px -4px #1C1C1C;
+}
+
+
 #buttonGroup {
     width: 100%;
     display: flex;
@@ -246,6 +268,9 @@ button[disabled]{
 
     #buttonGroup {
         flex-direction: column;
+    }
+    .paragraph{
+        max-width: 320px;
     }
 
     .button {
